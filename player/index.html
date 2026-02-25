@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player de Mídia</title>
+    <link rel="stylesheet" href="player.css">
+</head>
+<body>
+    <div id="player-wrapper">
+        
+        <div id="weather-sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <img id="sidebar-logo-img" src="">
+                </div>
+                <div class="location" id="sidebar-location">Carregando...</div>
+            </div>
+            <div class="current-weather">
+                <div class="icon" id="current-weather-icon">☀️</div>
+                <div class="temp" id="current-weather-temp">--°</div>
+                <div class="description" id="current-weather-desc">Ensolarado</div>
+            </div>
+            <div class="daily-forecast">
+                <div class="title">Previsão</div>
+                <div id="daily-forecast-container"></div>
+            </div>
+        </div>
+
+        <div id="media-container">
+            <div class="loading-spinner"></div>
+        </div>
+
+        <div id="info-panel">
+            <div class="news-content">
+                <div class="news-title" id="news-title">Carregando notícias...</div>
+                <div class="news-summary" id="news-summary">Aguarde...</div>
+            </div>
+            <div class="news-timestamp"></div>
+        </div>
+
+        <div id="settings-panel">
+            <div class="settings-content">
+                <h2>Configurações da TV</h2>
+                <div class="settings-group">
+                    <label for="playlist-select">Mudar Playlist</label>
+                    <select id="playlist-select" class="settings-interactive"></select>
+                    <button id="save-playlist-btn" class="settings-interactive">Ativar Playlist</button>
+                </div>
+                <div class="settings-group">
+                    <label>Diagnóstico</label>
+                    <div id="connection-status">
+                        <span>Internet: <span id="internet-status-value">Verificando...</span></span>
+                        <span>Supabase: <span id="supabase-status-value">Verificando...</span></span>
+                    </div>
+                    <button id="restart-player-btn" class="settings-interactive">Reiniciar Player</button>
+                </div>
+                <div class="settings-group">
+                    <label>Sistema</label>
+                    <button id="unpair-tv-btn" class="settings-interactive btn-danger">Desparear TV</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="pairing-screen" class="overlay">
+        <h1>Configure esta TV</h1>
+        <p>No seu painel de admin, crie uma nova TV e use o código abaixo:</p>
+        <div id="pairing-code">Gerando código...</div>
+    </div>
+
+    <!-- Supabase via CDN (sem necessidade de servidor) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="player.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/admin", "destination": "/features/auth/auth.html" },
+    { "source": "/player", "destination": "/player/index.html" }
+  ]
+}

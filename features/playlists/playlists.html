@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlists - TV Corporativa</title>
+    <link rel="stylesheet" href="../../shared/css/main.css">
+</head>
+<body>
+    <div class="screen active" id="adminScreen">
+        <header class="admin-header">
+            <div class="admin-title">TV Corp Admin</div>
+            <nav class="admin-nav">
+                <a href="../dashboard/dashboard.html" class="nav-btn">Dashboard</a>
+                <a href="../medias/medias.html" class="nav-btn">Mídias</a>
+                <a href="../playlists/playlists.html" class="nav-btn active">Playlists</a>
+                <a href="../tvs/tvs.html" class="nav-btn">TVs</a>
+                <a href="../settings/settings.html" class="nav-btn">Configurações</a>
+            </nav>
+            <div class="nav-user">
+                <span id="user-email-display"></span>
+                <button id="logout-btn" class="btn btn-sm btn-secondary">Sair</button>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            <section class="card">
+                <div class="card-header">
+                    <h2>Gerenciamento de Playlists</h2>
+                    <button id="add-playlist-btn" class="btn btn-primary">Criar Nova Playlist</button>
+                </div>
+                <div id="playlist-list-container">
+                    <p>Carregando playlists...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="playlist-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Criar Nova Playlist</h2>
+                <button class="close-btn" id="close-playlist-modal">&times;</button>
+            </div>
+            <form id="playlist-form">
+                <input type="hidden" id="playlist-id">
+                <div class="form-group">
+                    <label for="playlist-name">Nome da Playlist</label>
+                    <input type="text" id="playlist-name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="playlist-description">Descrição</label>
+                    <textarea id="playlist-description" class="form-input"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-playlist-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="edit-media-modal" class="modal">
+        <div class="modal-content large">
+             <div class="modal-header">
+                <h2 id="edit-media-modal-title">Editar Mídias da Playlist</h2>
+                <button class="close-btn" id="close-edit-media-modal">&times;</button>
+            </div>
+            <div class="playlist-media-manager">
+                <div class="media-column">
+                    <h4>Mídias na Playlist</h4>
+                    <div id="playlist-medias-list"></div>
+                </div>
+                <div class="media-column">
+                    <h4>Mídias Disponíveis</h4>
+                    <div id="available-medias-list"></div>
+                </div>
+            </div>
+             <div class="form-actions">
+                <button type="button" class="btn btn-primary" id="save-media-changes-btn">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="playlists.js"></script>
+</body>
+</html>

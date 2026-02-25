@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TVs - TV Corporativa</title>
+    <link rel="stylesheet" href="../../shared/css/main.css">
+</head>
+<body>
+    <div class="screen active" id="adminScreen">
+        <header class="admin-header">
+            <div class="admin-title">TV Corp Admin</div>
+            <nav class="admin-nav">
+                <a href="../dashboard/dashboard.html" class="nav-btn">Dashboard</a>
+                <a href="../medias/medias.html" class="nav-btn">Mídias</a>
+                <a href="../playlists/playlists.html" class="nav-btn">Playlists</a>
+                <a href="../tvs/tvs.html" class="nav-btn active">TVs</a>
+                <a href="../settings/settings.html" class="nav-btn">Configurações</a>
+            </nav>
+            <div class="nav-user">
+                <span id="user-email-display"></span>
+                <button id="logout-btn" class="btn btn-sm btn-secondary">Sair</button>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            <section class="card">
+                <div class="card-header">
+                    <h2>Gerenciamento de TVs</h2>
+                    <button id="add-tv-btn" class="btn btn-primary">Registrar Nova TV</button>
+                </div>
+                <div id="tv-list-container">
+                    <p>Carregando TVs...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="tv-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="tv-modal-title">Registrar Nova TV</h2>
+                <button class="close-btn" id="close-tv-modal">&times;</button>
+            </div>
+            <form id="tv-form">
+                <input type="hidden" id="tv-id">
+                <div class="form-group">
+                    <label for="tv-name">Nome da TV (Ex: TV da Recepção)</label>
+                    <input type="text" id="tv-name" class="form-input" required>
+                </div>
+                
+                <div class="form-group" id="pairing-code-group">
+                    <label for="tv-pairing-code">Código de Pareamento da TV</label>
+                    <input type="text" id="tv-pairing-code" class="form-input" placeholder="Digite o código que aparece na tela da TV">
+                </div>
+
+                <div class="form-group">
+                    <label for="tv-location">Localização (Ex: Térreo)</label>
+                    <input type="text" id="tv-location" class="form-input">
+                </div>
+                 <div class="form-group">
+                    <label for="tv-playlist-select">Playlist Inicial</label>
+                    <select id="tv-playlist-select" class="form-input">
+                        <option value="">Nenhuma</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tv-orientation">Orientação da Tela</label>
+                    <select id="tv-orientation" class="form-input" required>
+                        <option value="horizontal">Horizontal</option>
+                        <option value="vertical">Vertical</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-tv-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="tvs.js"></script>
+</body>
+</html>

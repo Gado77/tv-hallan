@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mídias - TV Corporativa</title>
+    <link rel="stylesheet" href="../../shared/css/main.css">
+</head>
+<body>
+    <div class="screen active" id="adminScreen">
+        <header class="admin-header">
+            <div class="admin-title">TV Corp Admin</div>
+            <nav class="admin-nav">
+                <a href="../dashboard/dashboard.html" class="nav-btn">Dashboard</a>
+                <a href="../medias/medias.html" class="nav-btn active">Mídias</a>
+                <a href="../playlists/playlists.html" class="nav-btn">Playlists</a>
+                <a href="../tvs/tvs.html" class="nav-btn">TVs</a>
+                <a href="../settings/settings.html" class="nav-btn">Configurações</a>
+            </nav>
+            <div class="nav-user">
+                <span id="user-email-display"></span>
+                <button id="logout-btn" class="btn btn-sm btn-secondary">Sair</button>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            <section class="card">
+                <div class="card-header">
+                    <h2>Adicionar Nova Mídia</h2>
+                </div>
+                <form id="add-media-form">
+                    <div class="form-group">
+                        <label for="media-name">Nome da Mídia</label>
+                        <input type="text" id="media-name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="media-file">Arquivo (Imagem ou Vídeo)</label>
+                        <input type="file" id="media-file" class="form-input" accept="image/*,video/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="media-duration">Duração de exibição (em segundos, apenas para imagens)</label>
+                        <input type="number" id="media-duration" class="form-input" value="10" min="1">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Adicionar Mídia</button>
+                </form>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <h2>Mídias Existentes</h2>
+                </div>
+                <div id="media-list-container">
+                    <p>Carregando mídias...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="medias.js"></script>
+</body>
+</html>

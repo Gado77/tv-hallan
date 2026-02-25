@@ -1,0 +1,300 @@
+:root {
+    /* Cores personalizáveis do novo design */
+    --theme-orange: #eb5a1e;
+    --theme-orange-dark: #d14f17;
+    --theme-text: #ffffff;
+    --theme-accent: #3498db; /* Azul para detalhes */
+    --theme-border: rgba(255, 255, 255, 0.2);
+    --dark-panel-bg: rgba(17, 24, 39, 0.95);
+    --dark-interactive-bg: rgba(55, 65, 81, 0.8);
+    --dark-interactive-focus-bg: rgba(75, 85, 99, 1);
+    --danger-color: #ef4444;
+}
+
+/* Reset básico e configurações do corpo */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    color: var(--theme-text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    box-sizing: border-box;
+}
+
+html {
+    /* Base fluida para escalabilidade */
+    font-size: clamp(10px, 1.2vw, 18px);
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+#player-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #000;
+}
+
+/* --- Mídia Principal e Transições --- */
+#media-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.7s ease-in-out;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#media-container img, #media-container video {
+    width: 100%; height: 100%; object-fit: cover; position: absolute;
+    top: 0; left: 0; opacity: 0; transition: opacity 0.8s ease-in-out;
+}
+#media-container img.active, #media-container video.active { opacity: 1; }
+
+
+/* --- BARRA LATERAL DE CLIMA --- */
+#weather-sidebar {
+    position: absolute; top: 0; left: 0;
+    width: 30%; max-width: 28rem;
+    height: 100%;
+    background: var(--theme-orange);
+    padding: 1.5rem;
+    transform: translateX(-101%);
+    transition: transform 0.7s ease-in-out;
+    z-index: 20;
+    display: flex; flex-direction: column; text-align: center;
+    padding-bottom: 9.5rem; 
+}
+.sidebar-header {
+    padding-bottom: 0.8rem; border-bottom: 1px solid var(--theme-border);
+    width: 100%; margin-bottom: 0.8rem;
+}
+.sidebar-header .logo-container {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+#sidebar-logo-img {
+    max-height: 5rem;
+    width: auto;
+    max-width: 80%;
+}
+.sidebar-header .location {
+    font-size: 1.5rem; font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.current-weather {
+    flex-grow: 1; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; padding: 0.5rem 0;
+}
+.current-weather .icon { font-size: 6rem; margin-bottom: -0.5rem; }
+.current-weather .temp { font-size: 4rem; font-weight: bold; }
+.current-weather .description { font-size: 1.4rem; font-weight: 300; margin-top: 0.5rem; text-transform: capitalize; }
+
+.daily-forecast {
+    padding-top: 1.5rem; width: 100%;
+    border-top: 1px solid var(--theme-border);
+    margin-top: auto;
+}
+.daily-forecast .title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-align: left;
+    text-transform: uppercase;
+}
+.day-item {
+    display: flex; flex-direction: column; align-items: flex-start;
+    padding: 0.6rem 0; border-bottom: 1px solid var(--theme-border);
+    font-size: 1rem;
+}
+.day-item:last-child { border-bottom: none; }
+.day-item .day-name { font-weight: 500; text-transform: capitalize; margin-bottom: 0.25rem; }
+.day-item .day-details { display: flex; align-items: center; width: 100%; }
+.day-item .icon { font-size: 1.5rem; margin-right: 0.8rem; }
+.day-item .temps { display: flex; align-items: center; font-weight: 500; }
+.day-item .temps .min { opacity: 0.7; margin-left: 0.6rem; }
+
+
+/* --- BARRA INFERIOR DE NOTÍCIAS --- */
+#info-panel {
+    position: absolute; bottom: 0; left: 0;
+    width: 100%; 
+    height: 8.125rem; 
+    background: var(--theme-orange-dark);
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--theme-border);
+    transform: translateY(100%);
+    transition: transform 0.7s ease-in-out;
+    z-index: 30; display: flex; align-items: center;
+}
+.news-content {
+    flex-grow: 1; display: flex; flex-direction: column;
+    justify-content: center; overflow: hidden;
+}
+.news-content .news-title {
+    font-size: 1.4rem; font-weight: bold; margin-bottom: 0.3rem;
+    white-space: normal; line-height: 1.2;
+    display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden;
+}
+.news-content .news-summary {
+    font-size: 1rem; line-height: 1.3; font-weight: 300;
+}
+.news-timestamp {
+    text-align: right; margin-left: 1.25rem; padding-left: 1.25rem;
+    border-left: 1px solid var(--theme-border);
+    font-size: 1.8rem; 
+    font-weight: 500; line-height: 1;
+}
+.news-timestamp span {
+    display: block; 
+    font-size: 1rem; 
+    font-weight: 300; opacity: 0.8;
+}
+
+
+/* --- LÓGICA DE ATIVAÇÃO DO MODO INFORMATIVO --- */
+body.info-mode-active #weather-sidebar,
+body.info-mode-active #info-panel {
+    transform: none; 
+}
+body.info-mode-active #media-container {
+    width: 70%; 
+    height: calc(100% - 8.125rem);
+    top: 0; left: 30%;
+}
+
+/* --- NOVO PAINEL DE CONFIGURAÇÕES --- */
+#settings-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    max-width: 500px;
+    height: 100%;
+    background: var(--dark-panel-bg);
+    backdrop-filter: blur(10px);
+    z-index: 50;
+    transform: translateX(100%); /* Começa escondido à direita */
+    transition: transform 0.5s ease-in-out;
+    padding: 2rem;
+    border-left: 1px solid var(--theme-border);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* Mostra o painel quando a classe é ativada no body */
+body.settings-active #settings-panel {
+    transform: translateX(0);
+}
+
+.settings-content h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--theme-orange);
+}
+
+.settings-group {
+    margin-bottom: 2rem;
+}
+
+.settings-group label {
+    display: block;
+    font-size: 1rem;
+    color: var(--text-muted, #9ca3af);
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.settings-interactive {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--theme-border);
+    background: var(--dark-interactive-bg);
+    color: var(--theme-text);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+button.settings-interactive {
+    text-align: center;
+    cursor: pointer;
+}
+
+.settings-interactive.btn-danger {
+    background: var(--danger-color);
+    font-weight: bold;
+}
+
+/* --- ESTILO DE FOCO PARA NAVEGAÇÃO PELO CONTROLE --- */
+.settings-interactive:focus {
+    outline: none;
+    border-color: var(--theme-accent);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+    background: var(--dark-interactive-focus-bg);
+}
+
+#connection-status {
+    background: rgba(0,0,0,0.2);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+#connection-status span {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+#connection-status span:last-child {
+    margin-bottom: 0;
+}
+
+
+/* --- Demais Elementos --- */
+.loading-spinner {
+    width: 4rem; height: 4rem;
+    border: 0.4rem solid rgba(255, 255, 255, 0.2);
+    border-top-color: #fff;
+    border-radius: 50%; animation: spin 1s linear infinite;
+    position: absolute; z-index: 15;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.overlay { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.9); display: flex; flex-direction: column; 
+    justify-content: center; align-items: center; text-align: center; z-index: 100; 
+}
+#pairing-code { 
+    font-size: 6vw; font-weight: bold; background: #fff; color: #000; 
+    padding: 3vh 6vw; 
+    border-radius: 1.5vmin; 
+    margin-top: 3vh; 
+    letter-spacing: 0.5vw;
+}
+body.vertical #player-wrapper {
+    transform-origin: top left;
+    transform: translateY(100vh) rotate(-90deg);
+    width: 100vh;
+    height: 100vw;
+}

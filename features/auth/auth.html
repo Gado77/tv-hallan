@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Acesso - Loopin TV</title>
+    <link rel="stylesheet" href="../../shared/css/main.css">
+</head>
+<body>
+    <div class="screen active" id="loginScreen">
+        <div class="login-container">
+            <div class="login-logo">📺</div>
+            <h1 class="login-title">Acesso ao Painel</h1>
+
+            <form id="login-form" autocomplete="off">
+                <div class="form-group">
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Senha:</label>
+                    <input type="password" id="login-password" class="form-input" required>
+                </div>
+                <div class="form-group" style="text-align: right;">
+                    <a href="#" id="forgot-password-link" style="color: var(--text-muted); font-size: 0.9rem;">Esqueci minha senha</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 2rem; color: var(--text-muted);">
+                Ainda não é cliente? 
+                <a href="#" id="open-signup-modal-btn">Solicite seu cadastro</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Seja nosso Cliente</h2>
+                <button class="close-btn" id="close-signup-modal">&times;</button>
+            </div>
+            <form id="signup-form" autocomplete="off">
+                <div class="form-group">
+                    <label for="signup-client-name">Nome da Empresa:</label>
+                    <input type="text" id="signup-client-name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Seu Email de Acesso:</label>
+                    <input type="email" id="signup-email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Crie sua Senha:</label>
+                    <input type="password" id="signup-password" class="form-input" required minlength="6" placeholder="Mínimo de 6 caracteres">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Enviar Solicitação</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="feedback-message" class="toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
