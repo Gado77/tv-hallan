@@ -566,4 +566,11 @@ function initPlayer() {
     getInitialData();
 }
 
+function gerarNovoCodigoPareamento() {
+    localStorage.removeItem('pendingTvId');
+    localStorage.removeItem('pendingCode');
+    if (pairingChannel) db.removeChannel(pairingChannel);
+    showPairingScreen();
+}
+
 document.addEventListener('DOMContentLoaded', initPlayer);
