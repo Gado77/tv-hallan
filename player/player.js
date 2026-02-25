@@ -566,7 +566,12 @@ function initPlayer() {
     getInitialData();
 }
 
-function gerarNovoCodigoPareamento() {
+async function gerarNovoCodigoPareamento() {
+    // Apaga a TV pendente anterior do banco antes de criar nova
+    const oldPendingId = localStorage.getItem('pendingTvId');
+    if (oldPendingId) {
+        await db.from('tvs').delete().eq('id', oldPendingId).is('client_id', null);
+    }
     localStorage.removeItem('pendingTvId');
     localStorage.removeItem('pendingCode');
     if (pairingChannel) db.removeChannel(pairingChannel);
